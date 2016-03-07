@@ -1,0 +1,43 @@
+Build a library for Print labels(representation of records) on invitation covers.
+
+given list of record
+    input format:
+        firstName,lastName,gender,age,city,state,country
+require output format
+    Prefix First Last
+    Prefix Last, First
+        Prefix Male - Mr
+               Female - Ms
+
+
+A sample of input given
+
+
+---------------------------------------------------------------------------------
+$ cat records.txt
+    Ram,Pal,Male,23,Kolkata,WestBengal,India
+$ java printLabels -fastlast records.txt
+    Mr Ram Pal
+------------------------------------
+$ ./printLabelsNameFirstLast records.txt
+    Mr Ram Pal
+$ ./printLabelsNameLastFirst records.txt
+    Mr Pal, Ram
+-------------------------------------------
+
+
+
+read records from given file
+make a list of guest
+print all guest name firstLast format
+
+
+Entities:
+    guest
+    guestlist
+
+
+
+
+
+

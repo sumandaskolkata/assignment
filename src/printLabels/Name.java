@@ -1,9 +1,11 @@
+package printLabels;
+
 public class Name {
     private String firstName;
     private String lastName;
 
-    Name(String firstname, String lastName) {
-        this.firstName = firstname;
+    Name(String firstName, String lastName) {
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
@@ -11,7 +13,7 @@ public class Name {
         return firstName + " " + lastName;
     }
 
-    public String toLsasFirst() {
+    public String toLastFirst() {
         return lastName + ", " + firstName;
     }
 }
