@@ -1,4 +1,4 @@
-package printLabels;
+package Entities;
 
 public enum Gender {
     MALE("Mr"),

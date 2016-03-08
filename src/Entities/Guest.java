@@ -1,4 +1,4 @@
-package printLabels;
+package Entities;
 
 public class Guest {
     private final Name name;
@@ -22,7 +22,11 @@ public class Guest {
         return gender.getPrefix() + " " + name.toLastFirst();
     }
 
-    public String getNameWithCountry() {
+    public String getFirstLastNameWithCountry() {
         return address.concatCountryNameWithGivenName(getFirstLastWithPrefix());
+    }
+
+    public String getLastFirstNameWithCountry() {
+        return address.concatCountryNameWithGivenName(getLastFirstWithPrefix());
     }
 }

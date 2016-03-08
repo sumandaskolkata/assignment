@@ -1,4 +1,4 @@
-package printLabels;
+package Entities;
 
 public class Address {
 
@@ -13,7 +13,7 @@ public class Address {
     }
 
     public String concatCountryNameWithGivenName(String name) {
-        return name + " " + this.country;
+        return name + ", " + this.country;
     }
 
 }

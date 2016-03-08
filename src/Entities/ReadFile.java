@@ -1,18 +1,17 @@
-package printLabels;
+package Entities;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
-public class FileReader {
+public class ReadFile {
     private final String fileName;
 
-    public FileReader(String fileName) {
+    public ReadFile(String fileName) {
         this.fileName = fileName;
     }
 
     public ArrayList<String[]> readGuestRecords() throws IOException {
-        java.io.FileReader fileRead = new java.io.FileReader(this.fileName);
+        FileReader fileRead = new FileReader(this.fileName);
         BufferedReader br = new BufferedReader(fileRead);
         String line;
         ArrayList<String[]> guestDetails = new ArrayList<>();

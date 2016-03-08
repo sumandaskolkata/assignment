@@ -1,17 +1,19 @@
-package printLabels;
+package PrintLabels;
+
+import Entities.ReadFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Invitation {
+public class PrintLabels {
     public static void main(String[] args) throws IOException {
         String option = args[0];
         String fileName = args[1];
         ArrayList<String> guestNameList;
 
-        printLabels.FileReader recordFile = new FileReader(fileName);
-        ArrayList<String[]> records = recordFile.readGuestRecords();
-        GuestList guestList = GuestList.generateGuestList(records);
+        ReadFile recordFile = new ReadFile(fileName);
+        ArrayList<String[]> guestRecords = recordFile.readGuestRecords();
+        GuestList guestList = GuestList.generateGuestList(guestRecords);
 
         switch (option) {
             case "-lastFirst":

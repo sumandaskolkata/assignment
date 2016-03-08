@@ -1,4 +1,7 @@
-package printLabels;
+package PrintLabels;
+
+import Entities.Gender;
+import Entities.Guest;
 
 import java.util.ArrayList;
 

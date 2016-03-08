@@ -1,7 +1,7 @@
-package printLabels;
+package PrintLabels;
 
+import org.junit.Assert;
 import org.junit.Test;
-import printLabels.GuestList;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,6 @@ public class GuestListTest {
         ArrayList<String[]> list = new ArrayList<>();
         list.add(guest);
         GuestList guestList = GuestList.generateGuestList(list);
-        guestList.guestFirstLastNameList();
+        Assert.assertTrue(guestList.guestFirstLastNameList().get(0).equals("Mr Arjun Rampal"));
     }
 }

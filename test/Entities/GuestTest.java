@@ -1,10 +1,10 @@
-package printLabels;
+package Entities;
 
 import static org.junit.Assert.assertEquals;
 
+import Entities.Gender;
+import Entities.Guest;
 import org.junit.Test;
-import printLabels.Gender;
-import printLabels.Guest;
 
 public class GuestTest {
     @Test
@@ -23,8 +23,14 @@ public class GuestTest {
     }
 
     @Test
-    public void peroson_name_with_countryName() {
+    public void peroson_firstLast_name_with_countryName() {
         Guest firstPerson = new Guest("Julius", "Barrows", Gender.FEMALE, 18, "Veda haven", "Vermont", "Macedonia");
-        assertEquals(firstPerson.getNameWithCountry(), "Ms Julius Barrows Macedonia");
+        assertEquals(firstPerson.getFirstLastNameWithCountry(), "Ms Julius Barrows, Macedonia");
+    }
+
+    @Test
+    public void testGuestLastFirstNameWithCountry() throws Exception {
+        Guest firstPerson = new Guest("Julius", "Barrows", Gender.FEMALE, 18, "Veda haven", "Vermont", "Macedonia");
+        assertEquals(firstPerson.getLastFirstNameWithCountry(), "Ms Barrows, Julius, Macedonia");
     }
 }

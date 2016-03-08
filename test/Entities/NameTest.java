@@ -1,5 +1,6 @@
-package printLabels;
+package Entities;
 
+import Entities.Name;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
