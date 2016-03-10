@@ -1,4 +1,4 @@
-package Entities;
+package entities;
 
 public class Address {
 
@@ -16,4 +16,7 @@ public class Address {
         return name + ", " + this.country;
     }
 
+    public boolean isYourCountry(String countryName) {
+        return this.country.equals(countryName);
+    }
 }

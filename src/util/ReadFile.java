@@ -1,7 +1,8 @@
-package Entities;
+package util;
 
 import java.io.*;
 import java.util.ArrayList;
+
 
 public class ReadFile {
     private final String fileName;

@@ -15,10 +15,11 @@ A sample of input given
 
 ---------------------------------------------------------------------------------
 $ cat records.txt
-    Ram,Pal,Male,23,Kolkata,WestBengal,India
-$ java printLabels -fastlast records.txt
+    Ram,Pal,Male,23,Kolkata,WestBengal,India\
+
+$ java Invitation -fastlast records.txt
     Mr Ram Pal
-------------------------------------
+----------------------------------------------------------
 $ ./printLabelsNameFirstLast records.txt
     Mr Ram Pal
 $ ./printLabelsNameLastFirst records.txt
@@ -32,12 +33,64 @@ make a list of guest
 print all guest name firstLast format
 
 
-Entities:
+entities:
     guest
     guestlist
 
+-----------------------------------------------------------------------------------------------
+print labels with country name for invitation covers.
+given a country name show all guests from that country.
+
+given list of record
+    input format:
+        firstName,lastName,gender,age,city,state,country
+require output format
+    Prefix First Last, Country
+    Prefix Last, First, Counrty
+        Prefix Male - Mr
+               Female - Ms
+
+---------------------------------------------------------------------------------
+$ cat records
+    Ram,Pal,Male,23,Kolkata,WestBengal,India
+    Ramu,Joy,Male,53,Kolkata,WestBengal,America
+
+$ java printLabelWithCountry -firstlast -country america records
+      Mr Ramu Joy, America
 
 
 
 
+$ java printLabelWithCountry - firstlast records
+    Mr Ram Pal, India
+    Mr Ramu Joy, America
+$ java printLabelWithCountry - LastFirst records
+    Mr Pal, Ram, India
+    Mr Joy, Ramu, America
+--------------------------------------
+$ cat records
+    Ram,Pal,Male,23,Kolkata,WestBengal,India
+    Ramu,Joy,Male,53,Kolkata,WestBengal,America
 
+$./printLastFirstNameLabelsWithCountryName.sh America records
+    Mr Joy, Ramu, America
+$./printFirstLastNameLabelsWithCountryName.sh America records
+    Mr Ramu Joy, America
+
+----------------------------------------------------
+
+requiremet 3
+    given a spacific county name and a age print all guest name who are above that age from that country.
+
+$cat records
+    Ram,Pal,Male,23,Kolkata,WestBengal,India
+    Ramu,Joy,Male,53,Kolkata,WestBengal,America
+
+$java PrintLabelsLegalDrinkersFirstLastNameWithCountryAndAge India records
+    Mr Ram Pal, India, 23
+$java PrintLabelsLegalDrinkersLastFirstNameWithCountryAndAge India records
+
+
+-------------------------------------------------------------------------
+refactoring :
+pull out string spliting from readFile and put it into factory method

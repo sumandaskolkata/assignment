@@ -1,4 +1,6 @@
-package Entities;
+package entities;
+
+import java.util.ArrayList;
 
 public class Guest {
     private final Name name;
@@ -6,10 +8,10 @@ public class Guest {
     private final Address address;
     private final Gender gender;
 
-    public Guest(String firstName, String lastName, Gender gender, int age, String city, String state, String country) {
-        this.name = new Name(firstName, lastName);
+    public Guest(Name name, int age, Gender gender, Address address) {
+        this.name = name;
         this.age = age;
-        this.address = new Address(city, state, country);
+        this.address = address;
         this.gender = gender;
     }
 
@@ -28,5 +30,34 @@ public class Guest {
 
     public String getLastFirstNameWithCountry() {
         return address.concatCountryNameWithGivenName(getLastFirstWithPrefix());
+    }
+
+    public String getLastFirstNameWithCountryAndAge() {
+        return address.concatCountryNameWithGivenName(getLastFirstWithPrefix()) + ", " + this.age;
+    }
+
+    public String getFirstLastNameWithCountryAndAge() {
+        return address.concatCountryNameWithGivenName(getFirstLastWithPrefix()) + ", " + this.age;
+    }
+
+    public boolean isLegalDrinker(int minimumAgeForDrink) {
+        return minimumAgeForDrink < this.age;
+    }
+
+    public boolean isYourCountry(String countryName) {
+        return address.isYourCountry(countryName);
+    }
+
+    public static ArrayList<Guest> generateGuest(ArrayList<String[]> guestDetails) {
+        ArrayList<Guest> guestList = new ArrayList<>();
+        for (String[] guest : guestDetails) {
+            Name name = new Name(guest[0], guest[1]);
+            int age = Integer.parseInt(guest[3]);
+            Gender gender = (guest[2].equals("Male")) ? Gender.MALE : Gender.FEMALE;
+            Address address = new Address(guest[4], guest[5], guest[6]);
+            Guest newGuest = new Guest(name, age, gender, address);
+            guestList.add(newGuest);
+        }
+        return guestList;
     }
 }

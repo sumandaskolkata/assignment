@@ -1,6 +1,5 @@
-package Entities;
+package entities;
 
-import Entities.Name;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
