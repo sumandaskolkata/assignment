@@ -12,11 +12,12 @@ public class Address {
         this.country = country;
     }
 
-    public String concatCountryNameWithGivenName(String name) {
-        return name + ", " + this.country;
-    }
 
     public boolean isYourCountry(String countryName) {
         return this.country.equals(countryName);
+    }
+
+    public String addressRerpresentation() {
+        return city + ", " + state + "\n" + country;
     }
 }

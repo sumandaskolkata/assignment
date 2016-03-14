@@ -1,5 +1,8 @@
 package entities;
 
+import Representation.GuestRepresentor;
+import guestFilter.Filter;
+
 import java.util.ArrayList;
 
 public class GuestList {
@@ -9,86 +12,23 @@ public class GuestList {
         this.guestList = guests;
     }
 
+    public GuestList filterGuestList(ArrayList<Filter> filters) {
+        ArrayList<Guest> filteredGuestList = this.guestList;
+        for (Filter filter : filters) {
+            filteredGuestList = filter.call(filteredGuestList);
+        }
+        return new GuestList(filteredGuestList);
+    }
 
-    public ArrayList<String> getFirstLastNameList() {
-        ArrayList<String> guestNameList = new ArrayList<>();
+    public ArrayList<String> representAllGuest(GuestRepresentor guestRepresentor) {
+        ArrayList<String> guestsNames = new ArrayList<>();
         for (Guest guest : guestList) {
-            String name = guest.getFirstLastWithPrefix();
-            guestNameList.add(name);
+            guestsNames.add(guest.toRepresent(guestRepresentor));
         }
-        return guestNameList;
+        return guestsNames;
     }
 
-    public ArrayList<String> getLastFirstNameList() {
-        ArrayList<String> guestNameList = new ArrayList<>();
-        for (Guest guest : guestList) {
-            String name = guest.getLastFirstWithPrefix();
-            guestNameList.add(name);
-        }
-        return guestNameList;
-    }
-
-    private ArrayList<Guest> sortGuestFromGivenCountry(String counrtyName) {
-        ArrayList<Guest> guestFromGivenCountry = new ArrayList<>();
-        for (Guest guest : guestList) {
-            if (guest.isYourCountry(counrtyName)) {
-                guestFromGivenCountry.add(guest);
-            }
-        }
-        return guestFromGivenCountry;
-    }
-
-    public ArrayList<String> getAllGuestsFirstLastNameFromGivenCountry(String countryName) {
-        ArrayList<Guest> sortedGuests;
-        sortedGuests = sortGuestFromGivenCountry(countryName);
-        ArrayList<String> guestNameList = new ArrayList<>();
-        for (Guest guest : sortedGuests) {
-            String name = guest.getFirstLastNameWithCountry();
-            guestNameList.add(name);
-        }
-        return guestNameList;
-    }
-
-    public ArrayList<String> getAllGuestLastFirstNameFromGivenCountry(String countryName) {
-        ArrayList<Guest> sortedGuests = sortGuestFromGivenCountry(countryName);
-        ArrayList<String> guestNameList = new ArrayList<>();
-        for (Guest guest : sortedGuests) {
-            String name = guest.getLastFirstNameWithCountry();
-            guestNameList.add(name);
-        }
-        return guestNameList;
-    }
-
-    public ArrayList<String> getAllGuestsFirstLastNameFromACountryWhoAllAreLegalDrinkers(String countryName, int drinkingAge) {
-        ArrayList<Guest> sortedGuests = sortGuestFromGivenCountry(countryName);
-        ArrayList<Guest> legalDrinkersGuests = findLegalDrinkersFromList(sortedGuests, drinkingAge);
-        ArrayList<String> legalDrinkerNames = new ArrayList<>();
-        for (Guest guest : legalDrinkersGuests) {
-            String name = guest.getFirstLastNameWithCountryAndAge();
-            legalDrinkerNames.add(name);
-        }
-        return legalDrinkerNames;
-    }
-
-
-    public ArrayList<String> getAllGuestsLastFirstNameFromACountryWhoAllAreLegalDrinkers(String countryName, int drinkingAge) {
-        ArrayList<Guest> sortedGuests = sortGuestFromGivenCountry(countryName);
-        ArrayList<Guest> legalDrinkersGuests = findLegalDrinkersFromList(sortedGuests, drinkingAge);
-        ArrayList<String> legalDrinkerNames = new ArrayList<>();
-        for (Guest guest : legalDrinkersGuests) {
-            String name = guest.getLastFirstNameWithCountryAndAge();
-            legalDrinkerNames.add(name);
-        }
-        return legalDrinkerNames;
-    }
-
-    private ArrayList<Guest> findLegalDrinkersFromList(ArrayList<Guest> sortedGuests, int drinkingAge) {
-        ArrayList<Guest> legalDrinkers = new ArrayList<>();
-        for (Guest guest : sortedGuests) {
-            if (guest.isLegalDrinker(drinkingAge)) {
-                legalDrinkers.add(guest);
-            }
-        }
-        return legalDrinkers;
+    public int numberOfGuest() {
+        return guestList.size();
     }
 }

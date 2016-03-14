@@ -5,12 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AddressTest {
-    @Test
-    public void testGuestNameWithCountryRepresentation() throws Exception {
-        Address address = new Address("Wasipur", "Bihar", "India");
-        String name = address.concatCountryNameWithGivenName("Mr Gabbar Sing");
-        assertTrue(name.equals("Mr Gabbar Sing, India"));
-    }
 
     @Test
     public void testIsYourCOuntryReturnTrueWhenGivenCountryMatchs() throws Exception {
@@ -22,5 +16,12 @@ public class AddressTest {
     public void testIsYourCOuntryReturnFalseWhenGivenCountryNotMatchs() throws Exception {
         Address address = new Address("Wasipur", "Bihar", "India");
         assertFalse(address.isYourCountry("America"));
+    }
+
+    @Test
+    public void testAddressRepresentaionShouldGiveCityStateAndCountryName() throws Exception {
+        Address address = new Address("Airport", "Army", "America");
+        assertEquals(address.addressRerpresentation(), "Airport, Army\nAmerica");
+
     }
 }

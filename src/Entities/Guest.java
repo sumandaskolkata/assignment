@@ -1,5 +1,7 @@
 package entities;
 
+import Representation.GuestRepresentor;
+
 import java.util.ArrayList;
 
 public class Guest {
@@ -16,30 +18,9 @@ public class Guest {
     }
 
 
-    public String getFirstLastWithPrefix() {
-        return gender.getPrefix() + " " + name.toFirstLast();
+    public String toRepresent(GuestRepresentor guestRepresentor) {
+        return guestRepresentor.call(this.name, this.gender, this.age, this.address);
     }
-
-    public String getLastFirstWithPrefix() {
-        return gender.getPrefix() + " " + name.toLastFirst();
-    }
-
-    public String getFirstLastNameWithCountry() {
-        return address.concatCountryNameWithGivenName(getFirstLastWithPrefix());
-    }
-
-    public String getLastFirstNameWithCountry() {
-        return address.concatCountryNameWithGivenName(getLastFirstWithPrefix());
-    }
-
-    public String getLastFirstNameWithCountryAndAge() {
-        return address.concatCountryNameWithGivenName(getLastFirstWithPrefix()) + ", " + this.age;
-    }
-
-    public String getFirstLastNameWithCountryAndAge() {
-        return address.concatCountryNameWithGivenName(getFirstLastWithPrefix()) + ", " + this.age;
-    }
-
     public boolean isLegalDrinker(int minimumAgeForDrink) {
         return minimumAgeForDrink < this.age;
     }
@@ -48,13 +29,14 @@ public class Guest {
         return address.isYourCountry(countryName);
     }
 
-    public static ArrayList<Guest> generateGuest(ArrayList<String[]> guestDetails) {
+    public static ArrayList<Guest> parse(ArrayList<String> guestDetails) {
         ArrayList<Guest> guestList = new ArrayList<>();
-        for (String[] guest : guestDetails) {
-            Name name = new Name(guest[0], guest[1]);
-            int age = Integer.parseInt(guest[3]);
-            Gender gender = (guest[2].equals("Male")) ? Gender.MALE : Gender.FEMALE;
-            Address address = new Address(guest[4], guest[5], guest[6]);
+        for (String guest : guestDetails) {
+            String[] guestDetail = guest.split(",");
+            Name name = new Name(guestDetail[0], guestDetail[1]);
+            int age = Integer.parseInt(guestDetail[3]);
+            Gender gender = Gender.valueOf(guestDetail[2].toUpperCase());
+            Address address = new Address(guestDetail[4], guestDetail[5], guestDetail[6]);
             Guest newGuest = new Guest(name, age, gender, address);
             guestList.add(newGuest);
         }

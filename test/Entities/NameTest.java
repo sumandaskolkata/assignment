@@ -1,19 +1,25 @@
 package entities;
 
+import Representation.FirstLastNameRepresentation;
+import Representation.LastFirstNameRepresentation;
+import Representation.NameRepresentor;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class NameTest {
     @Test
-    public void testFirstLastNameRepresentation() {
+    public void testNameRepresentReturnFirstLastNameWhenRepresentorIsFirstLast() throws Exception {
+        NameRepresentor representor = new FirstLastNameRepresentation();
         Name name = new Name("Ramu", "Kaka");
-        assertTrue(name.toFirstLast().equals("Ramu Kaka"));
-    }
+        assertEquals(name.represent(representor), "Ramu Kaka");
 
+    }
     @Test
-    public void testLastFirstNameRepresentation() {
-        Name name = new Name("Sun", "Moon");
-        assertTrue(name.toLastFirst().equals("Moon, Sun"));
+    public void testNameRepresentReturnLastFirstNameWhenRepresentorIsLastFirst() throws Exception {
+        NameRepresentor representor = new LastFirstNameRepresentation();
+        Name name = new Name("Ramu", "Kaka");
+        assertEquals(name.represent(representor), "Kaka, Ramu");
+
     }
 }

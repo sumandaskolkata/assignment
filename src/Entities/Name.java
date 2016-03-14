@@ -1,5 +1,7 @@
 package entities;
 
+import Representation.NameRepresentor;
+
 public class Name {
     private String firstName;
     private String lastName;
@@ -9,11 +11,8 @@ public class Name {
         this.lastName = lastName;
     }
 
-    public String toFirstLast() {
-        return firstName + " " + lastName;
+    public String represent(NameRepresentor representor) {
+        return representor.call(firstName, lastName);
     }
 
-    public String toLastFirst() {
-        return lastName + ", " + firstName;
-    }
 }
