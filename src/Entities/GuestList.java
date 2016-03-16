@@ -23,7 +23,7 @@ public class GuestList {
     public ArrayList<String> representAllGuest(GuestRepresentor guestRepresentor) {
         ArrayList<String> guestsNames = new ArrayList<>();
         for (Guest guest : guestList) {
-            guestsNames.add(guest.toRepresent(guestRepresentor));
+            guestsNames.add(guest.represent(guestRepresentor));
         }
         return guestsNames;
     }

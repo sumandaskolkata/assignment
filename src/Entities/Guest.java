@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class Guest {
     private final Name name;
-    private final int age;
+    private final Age age;
     private final Address address;
     private final Gender gender;
 
-    public Guest(Name name, int age, Gender gender, Address address) {
+    public Guest(Name name, Age age, Gender gender, Address address) {
         this.name = name;
         this.age = age;
         this.address = address;
@@ -18,11 +18,11 @@ public class Guest {
     }
 
 
-    public String toRepresent(GuestRepresentor guestRepresentor) {
+    public String represent(GuestRepresentor guestRepresentor) {
         return guestRepresentor.call(this.name, this.gender, this.age, this.address);
     }
     public boolean isLegalDrinker(int minimumAgeForDrink) {
-        return minimumAgeForDrink < this.age;
+        return age.isLegalDrinker(minimumAgeForDrink);
     }
 
     public boolean isYourCountry(String countryName) {
@@ -34,7 +34,8 @@ public class Guest {
         for (String guest : guestDetails) {
             String[] guestDetail = guest.split(",");
             Name name = new Name(guestDetail[0], guestDetail[1]);
-            int age = Integer.parseInt(guestDetail[3]);
+            int parseAge = Integer.parseInt(guestDetail[3]);
+            Age age = new Age(parseAge);
             Gender gender = Gender.valueOf(guestDetail[2].toUpperCase());
             Address address = new Address(guestDetail[4], guestDetail[5], guestDetail[6]);
             Guest newGuest = new Guest(name, age, gender, address);

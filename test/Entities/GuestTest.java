@@ -19,10 +19,12 @@ public class GuestTest {
     public void setUp() throws Exception {
         Name femaleName = new Name("Julius", "Barrows");
         Address maleAddress = new Address("Veda haven", "Vermont", "Macedonia");
-        female = new Guest(femaleName, 18, Gender.FEMALE, maleAddress);
+        Age femaleAge = new Age(18);
+        female = new Guest(femaleName, femaleAge, Gender.FEMALE, maleAddress);
         Name maleName = new Name("Gavin", "Hyatt");
         Address femaleAddress = new Address("Crooks ton", "Illinois", "Romania");
-        male = new Guest(maleName, 32, Gender.MALE, femaleAddress);
+        Age maleAge = new Age(32);
+        male = new Guest(maleName, maleAge, Gender.MALE, femaleAddress);
 
     }
     @Test
@@ -49,13 +51,12 @@ public class GuestTest {
     public void testToRepresentShouldTakeAGuestRepresentorAndCallIt() throws Exception {
         GuestRepresent represent = new GuestRepresent(new FirstLastNameRepresentation()) {
             @Override
-            public String call(Name name, Gender gender, int age, Address address) {
+            public String call(Name name, Gender gender, Age age, Address address) {
                 assertEquals(gender.getPrefix(), "Mr");
-                assertEquals(age, 32);
                 return super.call(name, gender, age, address);
             }
         };
-        male.toRepresent(represent);
+        male.represent(represent);
 
     }
 

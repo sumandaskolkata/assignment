@@ -11,29 +11,34 @@ public class Template {
 
     public String represent() {
         String[] address = this.address.split("\n");
-        int firstAddressLength = address[0].length();
-        int secondAddressLength = address[1].length();
-        int nameLength = name.length();
-        int longString = (nameLength > firstAddressLength) ? nameLength + 1 : firstAddressLength + 1;
-        int maxLength = (longString > secondAddressLength) ? longString : secondAddressLength + 1;
-        String border = "";
-        for (int i = 0; i < maxLength + 1; i++) {
-            border = border + "-";
-        }
+        String firstAddress = address[0];
+        String lastAddress = address[1];
+        int longStringBetweenNameAandAddress = (name.length() > firstAddress.length()) ? name.length() + 1 : firstAddress.length() + 1;
+        int maxStringLength = (longStringBetweenNameAandAddress > lastAddress.length()) ? longStringBetweenNameAandAddress : lastAddress.length() + 1;
 
-        String topborder = "+" + border + "+";
-        String middleBorder = "|" + border + "|";
-        String name = formatGivenStringWithSpaceAndSymbol(maxLength - nameLength, "|", this.name);
-        String firstAddress = formatGivenStringWithSpaceAndSymbol(maxLength - firstAddressLength, "|", address[0]);
-        String lastAddress = formatGivenStringWithSpaceAndSymbol(maxLength - address[1].length(), "|", address[1]);
-        return topborder + "\n" + name + "\n" + middleBorder + "\n" + firstAddress + "\n" + lastAddress + "\n" + topborder;
+
+        String topAndBottomBorder =createTopAndBottomBorder(maxStringLength,"+");
+        String middleBorder = createTopAndBottomBorder(maxStringLength,"|");
+        String nameConcatWithSymbol = joinGivenStringWithSpaceAndSymbol(maxStringLength - name.length(), "|", this.name);
+        String firstAddressConcatWithSymbol = joinGivenStringWithSpaceAndSymbol(maxStringLength - firstAddress.length(), "|", address[0]);
+        String lastAddressConcatWithSymbol = joinGivenStringWithSpaceAndSymbol(maxStringLength - lastAddress.length(), "|", address[1]);
+        return topAndBottomBorder + "\n" + nameConcatWithSymbol + "\n" + middleBorder + "\n" +
+                firstAddressConcatWithSymbol + "\n" + lastAddressConcatWithSymbol + "\n" + topAndBottomBorder;
 
     }
 
-    private String formatGivenStringWithSpaceAndSymbol(int numberOfSpace, String symbol, String givenString) {
+    private String createTopAndBottomBorder(int length,String symbol){
+        String border = "";
+        for (int i = 0; i < length + 1; i++) {
+            border = border + "-";
+        }
+        return symbol+border+symbol;
+    }
+
+    private String joinGivenStringWithSpaceAndSymbol(int numberOfSpace, String symbol, String givenString) {
         String result = symbol + " " + givenString;
-        String spaces = " ";
-        for (int i = 0; i < numberOfSpace - 1; i++) {
+        String spaces = "";
+        for (int i = 0; i < numberOfSpace ; i++) {
             spaces = spaces + " ";
         }
         return result + spaces + symbol;
